@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>회원가입</title>
+    <link rel="stylesheet" href="../css/signup.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <h1>회원가입</h1>
+        <nav>
+            <ul>
+
+                <li>
+                    <a href="index.html" class="h1-a">홈으로</a>
+                </li>
+                <li>
+                    <a href="about_me.html" class="h1-a">자기소개</a>
+                </li>
+                <li>
+                    <a href="travel.html" class="h1-a">여행사이트</a>
+                </li>
+                <li>
+                    <a href="signup.html" class="h1-a">회원가입</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="javascript:alert('제출성공');" name="memberFrm">
+            <table id="enroll">
+                <tr>
+                    <th>아이디<span class="req">*</span></th>
+                    <td>
+                        <input type="text" name="userId" id="userId" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>비밀번호<span class="req">*</span></th>
+                    <td>
+                        <input type="password" name="pwd" id="pwd" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>비밀번호확인</th>
+                    <td>
+                        <input type="password" id="pwdCheck" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>이름<span class="req">*</span></th>
+                    <td>
+                        <input type="text" name="userName" id="userName" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>이메일<span class="req">*</span></th>
+                    <td>
+                        <input type="email" name="email" id="email" />
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2" class="btn-wrapper">
+                        <input type="submit" value="제출" id="submit-btn" />
+                        <input type="reset" value="초기화" id="reset-btn" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <button id="viewMembersBtn">회원목록 열람</button>
+        <table id="memberList" style="display: none;">
+            <caption>회원 목록</caption>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>아이디</th>
+                    <th>이메일</th>
+                </tr>
+            </thead>
+            <tbody id="memberListBody"></tbody>
+        </table>
+    </main>
+    <script>
+        document.getElementById('viewMembersBtn').addEventListener('click', function () {
+            var memberListTable = document.getElementById('memberList');
+            var memberListBody = document.getElementById('memberListBody');
+
+
+
+        });
+
+        document.forms.memberFrm.addEventListener('submit', function () {
+            event.preventDefault();
+            var userId = document.getElementById('userId').value;
+            var pwd = document.getElementById('pwd').value;
+            var userName = document.getElementById('userName').value;
+            var email = document.getElementById('email').value;
+
+
+            // 유효성 검사
+            if (!userId || !pwd || !userName || !email) {
+                alert('모든 필드를 입력해주세요.');
+                return;
+            }
+
+            // 이메일 유효성 검사
+            if (!validateEmail(email)) {
+                alert('유효한 이메일을 입력해주세요.');
+                return;
+            }
+
+            // 정보 저장
+            var userInfo = {
+                userId: userId,
+                pwd: pwd,
+                userName: userName,
+                email: email,
+            };
+
+            localStorage.setItem(userName, JSON.stringify(userInfo));
+
+            alert('회원가입이 완료되었습니다.');
+            this.reset();
+        });
+
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function openMemberListPopup() {
+            var memberListTable = document.createElement('table');
+            memberListTable.id = 'memberListTable';
+
+            // 웹 스토리지에서 회원 정보 가져오기
+            var members = [];
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                var userInfo = JSON.parse(localStorage.getItem(key));
+                members.push(userInfo);
+            }
+
+            // 회원 목록 테이블 생성
+            var tableBody = document.createElement('tbody');
+            for (var j = 0; j < members.length; j++) {
+                var member = members[j];
+                var row = document.createElement('tr');
+
+                var nameCell = document.createElement('td');
+                nameCell.textContent = member.userName;
+                row.appendChild(nameCell);
+
+                var idCell = document.createElement('td');
+                idCell.textContent = member.userId;
+                row.appendChild(idCell);
+
+                var pwdCell = document.createElement('td');
+                pwdCell.textContent = member.pwd;
+                row.appendChild(pwdCell);
+
+                var emailCell = document.createElement('td');
+                emailCell.textContent = member.email;
+                row.appendChild(emailCell);
+
+                tableBody.appendChild(row);
+            }
+
+            memberListTable.appendChild(tableBody);
+
+            // 팝업 창 생성
+            var popup = window.open('', 'memberListPopup', 'width=500,height=400');
+            popup.document.body.appendChild(memberListTable);
+        }
+
+        document.getElementById('viewMembersBtn').addEventListener('click', function () {
+            openMemberListPopup();
+        });
+
+        const submitBtn = document.getElementById('submit-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        submitBtn.classList.add('w-btn-gra2');
+        resetBtn.classList.add('w-btn-gra2');
+
+        // 비밀번호/비밀번호 체크 일치여부 검사
+        document.querySelector("#pwdCheck").onblur = isEqualPwd;
+
+        document.memberFrm.onsubmit = function () {
+            const userId = document.getElementById("userId");
+            const pwd = document.getElementById("pwd");
+            const pwdCheck = document.getElementById("pwdCheck");
+            const userName = document.getElementById("userName");
+            const email = document.getElementById("email");
+
+            const regExp1 = /^[a-z][a-z\d]{3,11}$/;
+            const regExp2 = /[0-9]/;
+         
+
+           
+        };
+
+        function isEqualPwd() {
+            const pwd = document.getElementById('pwd');
+            const pwdCheck = document.getElementById('pwdCheck');
+
+            if (pwd.value === pwdCheck.value) {
+                return true;
+            } else {
+                alert('비밀번호가 일치하지 않습니다.');
+                pwd.select();
+                return false;
+            }
+        }
+
+        function regExpTest(regExp, el, msg) {
+            if (regExp.test(el.value)) {
+                return true;
+            } else {
+                alert(msg);
+                el.value = '';
+                el.focus();
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
