@@ -1,0 +1,92 @@
+body {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 헤드 시작 */
+header {
+  display: flex;
+  gap: 30vw;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+hr {
+  width: 56vw;
+}
+
+
+
+a {
+  text-decoration: none;
+}
+
+.h1-a {
+  display: block;
+  text-align: center;
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background: #302e2a;
+}
+
+.h1-a:hover {
+  color: #302e2a;
+  background: white;
+}
+
+/* 헤드 끝 */
+
+main {
+  height: 70vh;
+  width: 56vw;
+}
+
+footer {
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.main_text {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  gap: 2vw;
+}
+
+.info_img {
+  width: 20vw;
+  border-radius: 13px;
+}
+
+.info_text {
+  font-size: 1.4em;
+}
+
+.footer-develorper {
+  border: 1px solid #000;
+}
+
+.instagram {
+  width: 10vh;
+}
+
+.facebook {
+  width: 7vh;
+}
+
+.youtube {
+  width: 10vh;
+}
+
+.sns {
+  margin-top: 70px;
+}

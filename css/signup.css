@@ -1,0 +1,129 @@
+table#enroll {
+  border: 1px solid;
+  border-spacing: 10px;
+  width: 500px;
+  height: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: rgb(255, 255, 255);
+  text-align: left;
+}
+
+body {
+  text-align: center;
+}
+
+/* 헤드 시작 */
+header {
+  display: flex;
+  gap: 30vw;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+hr {
+  width: 56vw;
+}
+
+
+
+a {
+  text-decoration: none;
+}
+
+.h1-a {
+  display: block;
+  text-align: center;
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background: #302e2a;
+}
+
+.h1-a:hover {
+  color: #302e2a;
+  background: white;
+}
+
+/* 헤드 끝 */
+
+table#enroll td.btn-wrapper {
+  text-align: center;
+}
+
+.phone {
+  width: 30px;
+}
+
+span.req {
+  color: red;
+}
+
+.short {
+  width: 50px;
+}
+
+/* 헤드 시작 */
+header {
+  display: flex;
+  gap: 30vw;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+hr {
+  width: 56vw;
+}
+
+a {
+  text-decoration: none;
+}
+
+.h1-a {
+  display: block;
+  text-align: center;
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background: #302e2a;
+}
+
+.h1-a:hover {
+  color: #302e2a;
+  background: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+caption {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#w-btn-gra2 {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  color: white;
+}
